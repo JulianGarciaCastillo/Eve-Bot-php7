@@ -2,6 +2,7 @@
 
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
+use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Mvc\Application;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
