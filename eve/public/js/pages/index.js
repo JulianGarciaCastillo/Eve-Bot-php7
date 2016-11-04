@@ -1,31 +1,41 @@
 $(document).ready(function () {
 
   // Array containing all messages
-  var messages = [];
-  var voice;
 
-  
-  setTimeout(function(){ initialize(); }, 201);
+  var messages = {
+    eve: [],
+    user: [],
+    all:[]
+  };
+  console.log(messages)
+  setTimeout(function () {
+    initialize();
+  }, 201);
 
   function initialize() {
-    addSentence(page_data.greeting.text);
+    addSentence(page_data.greeting.text, true);
     input();
   }
 
-  function addSentence(sentence) {
-
-    messages.push(sentence);
+  function addSentence(sentence, eve) {
+    if (eve) {
+      messages["eve"].push(sentence);
+      sayIt(sentence);
+    } else {
+      messages["user"].push(sentence);
+    }
+    messages["all"].push(sentence);
     var div = $("<div>", {
       "class": "message"
     });
     div.html(sentence);
     $("#container").append(div);
 
-    sayIt(sentence);
+    
   }
 
   function sayIt(sentence) {
-     responsiveVoice.speak(sentence);
+    responsiveVoice.speak(sentence);
   }
 
   function input() {
@@ -34,7 +44,7 @@ $(document).ready(function () {
       if (e.keyCode == 13) {
         var userSentence = $(this).val();
         $(this).val("");
-        addSentence(userSentence);
+        addSentence(userSentence, false);
         console.log(messages)
       }
     });
