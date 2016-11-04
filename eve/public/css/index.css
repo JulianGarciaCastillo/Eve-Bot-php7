@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'appleFont';
+  src: url('../fonts/MYRIADAT.TTF')  format('truetype');
+}
+body {
+  color: #8b8b8b;
+  background: #ECECEC;
+  font-family: 'appleFont';
+  font-weight: bold;
+  font-size: 1.9em;
+}
+
+#container {
+  position: relative;
+  height: 70vh;
+  margin-top: 6vh;
+  padding-top: 20px;
+}
+
+.message::before {
+  content: "- ";
+}
+
+.realFx {
+  border-radius: 15px;
+  text-shadow: 0px 1px 0px #fff;
+  border-style: none solid solid solid;
+  border-color: #a7a7a7;
+  box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px rgba(0, 0, 0, 0.2), 0px 8px 10px rgba(0, 0, 0, 0.1);
+  background: none;
+  border: none
+}
+
+#userInput {
+  position: relative;
+  padding-left:30px; 
+  top: 20px;
+  color: #333;
+  outline: none;
+}
+
+#userInput:focus {
+  box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
+  background: none;
+  border: none;
+}

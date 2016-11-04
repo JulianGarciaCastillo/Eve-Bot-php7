@@ -5,6 +5,7 @@ use Phalcon\Mvc\View;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Mvc\Application;
+use Phalcon\Mvc\View\Engine\Volt;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 
 
@@ -34,17 +35,62 @@ function () {
 }
 );
 
-// Setup a base URI so that all generated URIs include the "tutorial" folder
 $di->set(
 "url",
 function () {
     $url = new UrlProvider();
     
-    $url->setBaseUri("/eve/");
+    $url->setBaseUri("./");
     
     return $url;
 }
 );
+
+// Register Volt as a service
+$di->set(
+"voltService",
+function ($view, $di) {
+    $volt = new Volt($view, $di);
+    
+    $volt->setOptions(
+    [
+    "compiledPath"      => "../app/templates/",
+    "compiledExtension" => ".compiled",
+    ]
+    );
+    
+    return $volt;
+}
+);
+
+// Register Volt as template engine
+$di->set(
+"view",
+function () {
+    $view = new View();
+    
+    $view->setViewsDir("../app/views/");
+    
+    $view->registerEngines(
+    [
+    ".volt" => "voltService",
+    ]
+    );
+    
+    return $view;
+}
+);
+
+//Setup the database service
+$di->set('db', function(){
+    return new \Phalcon\Db\Adapter\Pdo\Mysql(array(
+    "host" => "localhost",
+    "username" => "root",
+    "password" => "605juli",
+    "dbname" => "eve"
+    ));
+});
+
 
 // Handling the application request
 $application = new Application($di);
