@@ -9,7 +9,7 @@
   {% block js %}
 
   <script type="text/javascript">
-
+  
 // This is how to pass variable from php controller to js
   var page_data = {
     greeting: {{ greeting | json_encode  }}

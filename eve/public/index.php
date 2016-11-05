@@ -40,7 +40,7 @@ $di->set(
 function () {
     $url = new UrlProvider();
     
-    $url->setBaseUri("./");
+    $url->setBaseUri("http://localhost/Eve-Bot-php7/eve/public/");
     
     return $url;
 }

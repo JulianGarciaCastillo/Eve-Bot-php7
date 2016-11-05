@@ -34,7 +34,29 @@ class IndexController extends Controller
         ]
         );
         
+    }
+      
+    /**
+    * @desc ajax with get ALFONSO
+    */
+    public function requestAction()
+    {
         
+        //disable view
+        $this->view->disable();
         
+        //if get
+        if($this->request->isGet() == true)
+        {
+            //if Ajax
+            if($this->request->isAjax() == true)
+            {
+                $this->response->setJsonContent(array('res' => array("1","2","3")));
+                $this->response->setStatusCode(200, "OK");
+                $this->response->send();
+            }
+        } else {
+            $this->response->setStatusCode(404, "Not Founda");
+        }     
     }
 }

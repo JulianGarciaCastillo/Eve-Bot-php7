@@ -5,7 +5,7 @@ $(document).ready(function () {
   var messages = {
     eve: [],
     user: [],
-    all:[]
+    all: []
   };
   console.log(messages)
   setTimeout(function () {
@@ -31,7 +31,7 @@ $(document).ready(function () {
     div.html(sentence);
     $("#container").append(div);
 
-    
+
   }
 
   function sayIt(sentence) {
@@ -45,7 +45,20 @@ $(document).ready(function () {
         var userSentence = $(this).val();
         $(this).val("");
         addSentence(userSentence, false);
-        console.log(messages)
+        
+        
+        // TESTING AJAX ALFONSO
+        $.ajax({
+          url: './index/request',
+          method: 'GET'
+        }).
+          done(function (data) {
+            console.log(data)
+          }).
+          fail(function (data) {
+            console.log(data)
+          });
+        // END AJAX CALL
       }
     });
   }
