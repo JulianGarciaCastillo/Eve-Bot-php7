@@ -38,6 +38,7 @@ $(document).ready(function () {
         var userSentence = $(this).val();
         $(this).val("");
         addSentence(userSentence, false);
+        createAnswer(userSentence);
       }
     });
   }
@@ -63,9 +64,18 @@ $(document).ready(function () {
     });
     div.html(sentence);
     $("#container").append(div);
+
     div.addClass("fade");
 
+    // Scroll to bottom
+    $('#container').animate({scrollTop: $('#container').prop("scrollHeight")}, 2000);
+  }
 
+  /* 
+  Create Eve Answer
+  @userSentence: String
+  */
+  function createAnswer(userSentence) {
 
   }
 
