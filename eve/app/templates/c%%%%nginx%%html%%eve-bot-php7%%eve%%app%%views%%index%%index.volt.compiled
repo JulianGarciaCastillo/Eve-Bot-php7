@@ -9,10 +9,10 @@
   
 
   <script type="text/javascript">
-
+  
 // This is how to pass variable from php controller to js
   var page_data = {
-    greeting: <?= json_encode($greeting) ?>
+    eve_answers: <?= json_encode($eve_answers) ?>
   };
   </script>
   
@@ -20,7 +20,6 @@
   <?= $this->assets->outputJs() ?>
   <div class="row">
     <div id="container" class="small-11 small-centered columns realFx">
-      <!--<div class="message positionDown"><?= $greeting->text ?></div>-->
     </div>
   </div>
 

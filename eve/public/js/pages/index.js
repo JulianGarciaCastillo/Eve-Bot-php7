@@ -7,29 +7,43 @@ $(document).ready(function () {
     user: [],
     all: []
   };
-  console.log(messages)
+  var eve_answers = _shuffle(page_data.eve_answers);
+
   setTimeout(function () {
     initialize();
   }, 201);
 
   function initialize() {
-    addSentence(page_data.greeting.text, true);
+    for (let i = 0; i < eve_answers.length; i++) {
+      if (eve_answers[i].type == "greetings") {
+        addSentence(eve_answers[i].text, true);
+        break;
+      }
+
+    }
+    //addSentence(page_data.greeting.text, true);
     input();
   }
 
   function addSentence(sentence, eve) {
+    let who;
+
     if (eve) {
-      messages["eve"].push(sentence);
+      who = "eve"
       sayIt(sentence);
     } else {
-      messages["user"].push(sentence);
+      who = "user";
     }
+    messages[who].push(sentence);
+
     messages["all"].push(sentence);
     var div = $("<div>", {
-      "class": "message"
+      "class": "message " + who
     });
     div.html(sentence);
     $("#container").append(div);
+    div.addClass("fade")
+ 
 
 
   }
@@ -45,22 +59,29 @@ $(document).ready(function () {
         var userSentence = $(this).val();
         $(this).val("");
         addSentence(userSentence, false);
-        
-        
-        // TESTING AJAX ALFONSO
-        $.ajax({
-          url: './index/request',
-          method: 'GET'
-        }).
-          done(function (data) {
-            console.log(data)
-          }).
-          fail(function (data) {
-            console.log(data)
-          });
-        // END AJAX CALL
       }
     });
+  }
+
+  // Shuffle array
+  function _shuffle(array) {
+    var currentIndex = array.length,
+      temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   }
 
 });

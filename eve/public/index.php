@@ -6,6 +6,7 @@ use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Mvc\Application;
 use Phalcon\Mvc\View\Engine\Volt;
+use Phalcon\Mvc\Router;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 
 
@@ -87,10 +88,10 @@ $di->set('db', function(){
     "host" => "localhost",
     "username" => "root",
     "password" => "605juli",
-    "dbname" => "eve"
+    "dbname" => "eve",
+    "charset" => "utf8"
     ));
 });
-
 
 // Handling the application request
 $application = new Application($di);
