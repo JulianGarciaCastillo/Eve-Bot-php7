@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
   // Array containing all messages
-
   var messages = {
     eve: [],
     user: [],
@@ -13,7 +12,15 @@ $(document).ready(function () {
     initialize();
   }, 201);
 
+
+  // Load  required functions
   function initialize() {
+    greetings();
+    input();
+  }
+
+  // Eve's' greetings
+  function greetings() {
     for (let i = 0; i < eve_answers.length; i++) {
       if (eve_answers[i].type == "greetings") {
         addSentence(eve_answers[i].text, true);
@@ -21,10 +28,24 @@ $(document).ready(function () {
       }
 
     }
-    //addSentence(page_data.greeting.text, true);
-    input();
   }
 
+  // Input field to send message
+  function input() {
+
+    $("#userInput").on('keyup', function (e) {
+      if (e.keyCode == 13) {
+        var userSentence = $(this).val();
+        $(this).val("");
+        addSentence(userSentence, false);
+      }
+    });
+  }
+
+  /* 
+  Append sentence to array and render
+  @sentence: String, @eve: Boolean
+  */
   function addSentence(sentence, eve) {
     let who;
 
@@ -42,28 +63,27 @@ $(document).ready(function () {
     });
     div.html(sentence);
     $("#container").append(div);
-    div.addClass("fade")
- 
+    div.addClass("fade");
+
 
 
   }
 
+  /*
+  Speak Sentences
+  @sentence: String
+  */
   function sayIt(sentence) {
     responsiveVoice.speak(sentence);
   }
 
-  function input() {
 
-    $("#userInput").on('keyup', function (e) {
-      if (e.keyCode == 13) {
-        var userSentence = $(this).val();
-        $(this).val("");
-        addSentence(userSentence, false);
-      }
-    });
-  }
+  //////// TOOLS
 
-  // Shuffle array
+  /* 
+  Shuffle array
+  @array: Array
+  */
   function _shuffle(array) {
     var currentIndex = array.length,
       temporaryValue, randomIndex;
